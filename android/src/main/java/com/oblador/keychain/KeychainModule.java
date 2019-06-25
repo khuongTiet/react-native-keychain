@@ -214,8 +214,8 @@ public class KeychainModule extends ReactContextBaseJavaModule {
     @ReactMethod
     public void getSupportedBiometryType(Promise promise) {
         try {
-            boolean fingerprintAuthAvailable = isFingerprintAuthAvailable();
-            if (fingerprintAuthAvailable) {
+            boolean biometricEnabled = isBiometricAuthEnabled();
+            if (biometricEnabled) {
                 promise.resolve(FINGERPRINT_SUPPORTED_NAME);
             } else {
                 promise.resolve(null);
@@ -265,8 +265,8 @@ public class KeychainModule extends ReactContextBaseJavaModule {
         return cipherStorageMap.get(cipherStorageName);
     }
 
-    private boolean isFingerprintAuthAvailable() {
-        return DeviceAvailability.isFingerprintAuthAvailable(getReactApplicationContext());
+    private boolean isBiometricAuthEnabled() {
+        return DeviceAvailability.isBiometricAuthEnabled(getReactApplicationContext());
     }
 
     private boolean isSecureHardwareAvailable() {
